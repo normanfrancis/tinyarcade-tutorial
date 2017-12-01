@@ -8,6 +8,9 @@ const uint16_t ALPHA = 0x1111;
 
 TinyScreen display = TinyScreen(TinyScreenPlus);
 
+#define zmax(a,b) ((a)>(b)?(a):(b))
+#define zmin(a,b) ((a)<(b)?(a):(b))
+
 typedef struct {
   int x;
   int y;
@@ -93,4 +96,17 @@ void readInputs() {
     if (checkJoystick(TAJoystickLeft)) ball.x -= 1;
   }
 }
+
+bool testBitmapCollision(ts_sprite *s1, ts_sprite *s2) {
+  //s1 left edge less than s2 right edge and
+  //s1 right edge greater than s2 left edge
+  if ((s1->x < s2->x + s2->width) && (s1->x + s1->width > s2->x))
+  //s2 top edge less than s1 bottom edge and
+  //s2 bottom edge greater than s1 top edge
+    if ((s2->y < s1->y + s1->height) && (s2->y + s2->height > s1->y))
+      return true;
+  return false;
+    
+}
+
 

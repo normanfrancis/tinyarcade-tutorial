@@ -10,3 +10,4 @@ const unsigned int ballBitmap[] = {
   TS_16b_White, TS_16b_White, TS_16b_White, TS_16b_White,
   ALPHA, TS_16b_White, TS_16b_White, ALPHA,
 };
+
