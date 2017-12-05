@@ -97,16 +97,44 @@ void readInputs() {
   }
 }
 
+//check if s1 is withing s2
 bool testBitmapCollision(ts_sprite *s1, ts_sprite *s2) {
   //s1 left edge less than s2 right edge and
   //s1 right edge greater than s2 left edge
   if ((s1->x < s2->x + s2->width) && (s1->x + s1->width > s2->x))
-  //s2 top edge less than s1 bottom edge and
-  //s2 bottom edge greater than s1 top edge
+    //s2 top edge less than s1 bottom edge and
+    //s2 bottom edge greater than s1 top edge
     if ((s2->y < s1->y + s1->height) && (s2->y + s2->height > s1->y))
       return true;
   return false;
-    
+
+}
+
+//check for overlapping pixels in bitmap within a rectangular range
+bool testPixelCollision(ts_sprite *s1, ts_sprite *s2) {
+  //return if s1 is inside s2
+  if (!testBitmapCollision(s1, s2)) return false;
+  //startingX is the left edge of sprt furthest from left of screen
+  int startX = zmax(s1->x, s2->x);
+  //endX is the right edge of sprt furthest from right of screen
+  int endX = zmin(s1->x + s1->width, s2->x + s2->width);
+  //startY the top edge of the sprt furthest from the top of screen
+  int startY = zmax(s1->y, s2->y);
+  //endY the bottom edge of the sprt furthest from the bottom of screen
+  int endY = zmin(s1->y + s1->height, s2->y + s2->height);
+  
+  //for loops goes down reach row and the column inside rectangular range
+  //iterate over vertical range (startY to endY)
+  for (int y = startY; y < endY; y++) {
+    //iterate over horizontal rage (startX to endX)
+    for (int x = startX; x < endX; x++) {
+      //if two non-transparent pixels overlap, there is a collision
+      if (s1->bitmap[(y - s1->y)*s1->width + (x - s1->x)] != ALPHA && s2->bitmap[(y - s2->y)*s2->width + (x - s2 ->x)] != ALPHA)
+        return true;
+    }
+  }
+  //there was no overlap in the rectangular range
+  return false;
 }
 
 
