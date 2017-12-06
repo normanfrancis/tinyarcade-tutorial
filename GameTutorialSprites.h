@@ -11,3 +11,10 @@ const unsigned int ballBitmap[] = {
   ALPHA, TS_16b_White, TS_16b_White, ALPHA,
 };
 
+const unsigned int redBrickBitmap[] = {
+  TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, 
+  TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, 
+  TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, 
+  TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, TS_16b_Red, 
+};
+

@@ -21,9 +21,10 @@ typedef struct {
 } ts_sprite;
 
 ts_sprite ball = {44, 28, 4, 4, 0, ballBitmap};
+ts_sprite redBrick = {43, 10, 10, 4, 0, redBrickBitmap};
 
-int amtSprites = 1;
-ts_sprite * spriteList[1] = {&ball};
+int amtSprites = 2;
+ts_sprite * spriteList[2] = {&ball, &redBrick};
 
 int backgroundColor = TS_16b_Black;
 
@@ -43,6 +44,21 @@ void setup() {
 void loop() {
   drawBuffer();
   readInputs();
+
+  if (testPixelCollision(&ball, &redBrick)) {
+    //set random x within screen width minus sprite width so it doesn't overflow on right
+    redBrick.x = random(0, (95-redBrick.width));
+    //set random y within screen height minus sprite height so it doesn't overflow on bottom
+    redBrick.y = random(0, (63-redBrick.height));
+  }
+
+  redBrick.x++;
+  if (redBrick.x == 95) {
+    //set x so that right is just outside left edge of screen (sprite is 10 across)
+    redBrick.x = -1*(redBrick.width+1);
+    //set random y within screen height minus sprite height so it doesn't overflow on bottom
+    redBrick.y = random(0, (63-redBrick.height));
+  }
 }
 
 void drawBuffer() {
